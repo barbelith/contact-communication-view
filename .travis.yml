@@ -1,0 +1,27 @@
+language: php
+
+# Allows using containers
+sudo: false
+
+# Cache composer packages so "composer install" is faster
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+
+php:
+  - 7.0
+
+# Update composer
+before-install:
+    - composer self-update
+
+# Install composer dependencies,
+# Create database, schema and fixtures
+install:
+    - composer install
+    - cp app/config/parameters.yml.dist app/config/parameters.yml
+
+
+script:
+    - ./vendor/bin/phpunit -c phpunit-test.xml
