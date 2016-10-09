@@ -8,14 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\OperationRepository")
  * @ORM\Table(
  *  indexes={
- *     @Index(name="phone_owner_contact_idx", columns={"phone_owner_id", "contact_id"}
+ *     @ORM\Index(name="phone_owner_contact_idx", columns={"phone_owner_id", "contact_id"})
  *  }
  * )
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="type", type="string")
- * @DiscriminatorMap({"call" = "CallOperation", "sms" = "SMSOperation"})
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"call" = "AppBundle\Entity\CallOperation", "sms" = "AppBundle\Entity\SMSOperation"})
  */
-class Operation
+abstract class Operation
 {
     const TYPE_CALL = 'call';
     const TYPE_SMS = 'sms';
@@ -31,21 +31,14 @@ class Operation
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
-     * @var string
-     */
-    protected $type;
-
-    /**
      * @ORM\Column(type="integer")
      * @var int
      */
     protected $phone_owner_id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ManyToOne(targetEntity="Contact")
-     * @JoinColumn(name="contact_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Contact")
+     * @ORM\JoinColumn(name="contact_id", referencedColumnName="id")
      * @var Contact
      */
     protected $contact;
@@ -76,22 +69,6 @@ class Operation
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
     }
 
     /**
@@ -145,16 +122,18 @@ class Operation
     /**
      * @return \DateTime
      */
-    public function getName()
+    public function getDate()
     {
-        return $this->name;
+        return $this->date;
     }
 
     /**
-     * @param \DateTime $name
+     * @param \DateTime $date
      */
-    public function setName($name)
+    public function setDate($date)
     {
-        $this->name = $name;
+        $this->date = $date;
     }
+
+    abstract public function getType();
 }

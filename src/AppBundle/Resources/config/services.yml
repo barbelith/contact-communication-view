@@ -1,0 +1,9 @@
+services:
+  communication.phone_retriever:
+    class: AppBundle\Service\PhoneRetrieverService
+    arguments:
+      - "%logs_url%"
+      - '@doctrine.orm.entity_manager'
+      - '@communication.reader_factory'
+  communication.reader_factory:
+    class: AppBundle\Import\Factory\ReaderFactory

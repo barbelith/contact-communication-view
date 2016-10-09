@@ -22,7 +22,7 @@ class HttpLoader implements LoaderInterface
      */
     public function getContents()
     {
-        if (filter_var($this->url, FILTER_VALIDATE_URL) === false) {
+        if (!$this->urlIsValid()) {
             throw new \LogicException('The url is not valid');
         }
 
@@ -59,7 +59,6 @@ class HttpLoader implements LoaderInterface
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $this->url);
-        curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -69,5 +68,13 @@ class HttpLoader implements LoaderInterface
         curl_close($ch);
 
         return $file;
+    }
+
+    /**
+     * @return bool
+     */
+    private function urlIsValid()
+    {
+        return filter_var($this->url, FILTER_VALIDATE_URL) !== false;
     }
 }

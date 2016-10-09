@@ -4,6 +4,11 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity()
+ */
 class CallOperation extends Operation
 {
     /**
@@ -26,5 +31,10 @@ class CallOperation extends Operation
     public function setDuration($duration)
     {
         $this->duration = $duration;
+    }
+
+    public function getType()
+    {
+        return self::TYPE_CALL;
     }
 }
