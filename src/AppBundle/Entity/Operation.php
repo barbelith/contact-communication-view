@@ -31,18 +31,12 @@ abstract class Operation
     protected $id;
 
     /**
-     * @var string
-     */
-    protected $type;
-
-    /**
      * @ORM\Column(type="integer")
      * @var int
      */
     protected $phone_owner_id;
 
     /**
-     * @ORM\Column(type="integer", name="contact_id")
      * @ORM\ManyToOne(targetEntity="Contact")
      * @ORM\JoinColumn(name="contact_id", referencedColumnName="id")
      * @var Contact
@@ -75,22 +69,6 @@ abstract class Operation
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
     }
 
     /**
@@ -144,16 +122,18 @@ abstract class Operation
     /**
      * @return \DateTime
      */
-    public function getName()
+    public function getDate()
     {
-        return $this->name;
+        return $this->date;
     }
 
     /**
-     * @param \DateTime $name
+     * @param \DateTime $date
      */
-    public function setName($name)
+    public function setDate($date)
     {
-        $this->name = $name;
+        $this->date = $date;
     }
+
+    abstract public function getType();
 }

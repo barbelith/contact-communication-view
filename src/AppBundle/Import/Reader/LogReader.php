@@ -63,4 +63,12 @@ class LogReader implements ReaderInterface
 
         return $operations;
     }
+
+    /**
+     * @return LoaderInterface
+     */
+    public function getLoader()
+    {
+        return $this->loader;
+    }
 }

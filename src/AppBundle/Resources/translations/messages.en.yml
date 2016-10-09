@@ -1,0 +1,8 @@
+contacts: Contacts
+type: Type
+direction: Direction
+date: Date
+duration: Duration
+unknown_contact: Unknown
+direction-I: Incoming
+direction-O: Outgoing

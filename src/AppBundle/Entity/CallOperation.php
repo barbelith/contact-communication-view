@@ -32,4 +32,9 @@ class CallOperation extends Operation
     {
         $this->duration = $duration;
     }
+
+    public function getType()
+    {
+        return self::TYPE_CALL;
+    }
 }

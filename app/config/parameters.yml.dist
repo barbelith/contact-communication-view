@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    logs_url: https://gist.githubusercontent.com/joserobleda/1530e8a6796f3286443eac80f419b13e/raw/81f159a80a0035a6173415b6d9e45b673c682bd1/communications.{number}.log
+

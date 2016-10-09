@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
-                <h1>Contact communication view</h1>
-            </div>
-        </div>
+    <div class="container">
+        <h1 class="title">Contact communication view</h1>
+
+        {# Phone number hardcoded for now #}
+        {{ render(controller('AppBundle:PhoneNumber:show', { number: '611222333' })) }}
     </div>
 {% endblock %}

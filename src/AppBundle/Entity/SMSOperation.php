@@ -11,5 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SMSOperation extends Operation
 {
-
+    public function getType()
+    {
+        return self::TYPE_SMS;
+    }
 }
