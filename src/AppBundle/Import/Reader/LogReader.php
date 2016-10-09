@@ -7,6 +7,8 @@ namespace AppBundle\Import\Reader;
 use AppBundle\Entity\Operation;
 use AppBundle\Import\Exception\NoContentsLoadedException;
 use AppBundle\Import\Loader\LoaderInterface;
+use AppBundle\Import\Mapping\LogOperationMapping;
+use AppBundle\Import\Parser\LogOperationParser;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class LogReader implements ReaderInterface
@@ -48,19 +50,17 @@ class LogReader implements ReaderInterface
     {
         $operations = new ArrayCollection();
 
+        $parser = new LogOperationParser(new LogOperationMapping());
+
         foreach ($logContent as $line) {
-            $operations->add($this->processLine($line));
+            $operation = $parser->parseItem($line);
+
+            if ($operation) {
+                $operations->add($operation);
+            }
+
         }
 
         return $operations;
-    }
-
-    /**
-     * @param $line
-     * @return Operation
-     */
-    private function processLine($line)
-    {
-        return new Operation();
     }
 }
