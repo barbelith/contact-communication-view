@@ -33,9 +33,9 @@
                                 <td>
                                     <span class="label label-primary">{{ operation.getType() }}</span>
                                 </td>
-                                <td>{{ 'direction-' ~ operation.direction | trans }}</td>
+                                <td>{{ ('direction-' ~ operation.direction)|trans }}</td>
                                 <td>{{ operation.date|date('d/m/Y H:i:s') }}</td>
-                                <td>{{ operation.type == 'call' ? operation.duration : '' }}</td>
+                                <td>{{ operation.type == 'call' ? operation.duration : '-' }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
