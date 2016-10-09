@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ContactRepository")
  * @ORM\Table(
  *  uniqueConstraints={
- *     @UniqueConstraint(name="phone_owner_phone_number_idx", columns={"phone_owner_id", "number"})
+ *     @ORM\UniqueConstraint(name="phone_owner_phone_number_idx", columns={"phone_owner_id", "number"})
  *  },
  *  indexes={
- *     @Index(name="phone_owner_idx", columns={"phone_owner_id"}
+ *     @ORM\Index(name="phone_owner_idx", columns={"phone_owner_id"})
  *  }
  * )
  */
@@ -25,7 +25,7 @@ class Contact
     protected $id;
 
     /**
-     * @ORM\Column(type="integer", inde)
+     * @ORM\Column(type="integer")
      * @var int
      */
     protected $phone_owner_id;

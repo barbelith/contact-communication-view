@@ -8,14 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\OperationRepository")
  * @ORM\Table(
  *  indexes={
- *     @Index(name="phone_owner_contact_idx", columns={"phone_owner_id", "contact_id"}
+ *     @ORM\Index(name="phone_owner_contact_idx", columns={"phone_owner_id", "contact_id"})
  *  }
  * )
- * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="type", type="string")
- * @DiscriminatorMap({"call" = "CallOperation", "sms" = "SMSOperation"})
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"call" = "AppBundle\Entity\CallOperation", "sms" = "AppBundle\Entity\SMSOperation"})
  */
-class Operation
+abstract class Operation
 {
     const TYPE_CALL = 'call';
     const TYPE_SMS = 'sms';
@@ -31,7 +31,6 @@ class Operation
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
      * @var string
      */
     protected $type;
@@ -43,9 +42,9 @@ class Operation
     protected $phone_owner_id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ManyToOne(targetEntity="Contact")
-     * @JoinColumn(name="contact_id", referencedColumnName="id")
+     * @ORM\Column(type="integer", name="contact_id")
+     * @ORM\ManyToOne(targetEntity="Contact")
+     * @ORM\JoinColumn(name="contact_id", referencedColumnName="id")
      * @var Contact
      */
     protected $contact;
